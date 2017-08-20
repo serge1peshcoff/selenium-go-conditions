@@ -16,7 +16,7 @@ So, what this package does is provides functions that returns `Condition`s, so y
 
 ### How to use it (aka example)
 
-First you `import "github.com/serge1peshcoff/selenium-go-conditions"`, and then you use `conditions` package. See `example.go` for more real-life example.
+First you `import "github.com/serge1peshcoff/selenium-go-conditions"`, and then you use `conditions` package. See `examples/example.go` for more real-life example.
 
 ## Contribution
 
