@@ -10,12 +10,6 @@ Recently `WebDriver.Wait()` function was added to Golang's Selenium binding (I'v
 
 There was a decision to implement only `WebDriver.Wait()` in this `github.com/tebeka/selenium` package, and leave the implementation of conditions to another library. So, here it is!
 
-## How does it work
-
-There is a `type Condition func (selenium.WebDriver) (bool, error)` and `WebDriver.Wait(cond Condition, timeout, interval time.Duration)` in Golang's Selenium binding. The `WebDriver.Wait()`'s implementaion is pretty simple: it starts an endless loop, and return either `nil` if the condition would evaluate to true, or `error` if there would be an error executing a condition or on timeout.
-
-So, what this package does is provides functions that returns `Condition`s, so you would be able to pass it as an argument for `WebDriver.Wait()` function.
-
 ## How to use it
 
 First you download it with:
@@ -34,6 +28,13 @@ and then you use the `conditions` package. See `examples/example.go` for a compl
 
 ## API
 
+The API is available at https://godoc.org/github.com/serge1peshcoff/selenium-go-conditions
+
+## How does it work
+
+There is a `type Condition func (selenium.WebDriver) (bool, error)` and `WebDriver.Wait(cond Condition, timeout, interval time.Duration)` in Golang's Selenium binding. The `WebDriver.Wait()`'s implementaion is pretty simple: it starts an endless loop, and return either `nil` if the condition would evaluate to true, or `error` if there would be an error executing a condition or on timeout.
+
+So, what this package does is provides functions that returns `Condition`s, so you would be able to pass it as an argument for `WebDriver.Wait()` function.
 
 ## Contribution
 
