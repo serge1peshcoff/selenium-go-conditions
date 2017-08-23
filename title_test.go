@@ -5,20 +5,11 @@ import (
 	"time"
 
 	conditions "github.com/serge1peshcoff/selenium-go-conditions"
-	"github.com/tebeka/selenium"
 )
 
 func TestTitleIs(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/title_change")
+	err := wd.Get("http://localhost:3000/title_change")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}
@@ -41,16 +32,8 @@ func TestTitleIs(t *testing.T) {
 }
 
 func TestTitleIsNot(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/title_change")
+	err := wd.Get("http://localhost:3000/title_change")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}
@@ -73,16 +56,9 @@ func TestTitleIsNot(t *testing.T) {
 }
 
 func TestTitleContains(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
 
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/title_change")
+	err := wd.Get("http://localhost:3000/title_change")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}
@@ -105,16 +81,8 @@ func TestTitleContains(t *testing.T) {
 }
 
 func TestTitleNotContains(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/title_change")
+	err := wd.Get("http://localhost:3000/title_change")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}

@@ -8,9 +8,11 @@ import (
 	"os/exec"
 	"testing"
 	"time"
+	"github.com/tebeka/selenium"
 )
 
 var cmd *exec.Cmd
+var wd selenium.WebDriver
 
 func TestMain(m *testing.M) {
 	err := runSelenium()
@@ -23,7 +25,16 @@ func TestMain(m *testing.M) {
 
 	go startServer()
 
+	err = runRemote()
+	if err != nil {
+		fmt.Printf("Error staring remote.\n")
+		panic(err)
+	}
+
+
 	retCode := m.Run()
+
+	wd.Quit()
 
 	err = stopSelenium()
 	if err != nil {
@@ -35,6 +46,13 @@ func TestMain(m *testing.M) {
 
 	os.Exit(retCode)
 
+}
+
+func runRemote() error {
+	caps := selenium.Capabilities{"browserName": "firefox"}
+	driver, err := selenium.NewRemote(caps, "")
+	wd = driver
+	return err
 }
 
 func runSelenium() error {

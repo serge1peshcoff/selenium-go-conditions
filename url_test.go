@@ -5,20 +5,11 @@ import (
 	"time"
 
 	conditions "github.com/serge1peshcoff/selenium-go-conditions"
-	"github.com/tebeka/selenium"
 )
 
 func TestURLIs(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/redirect")
+	err := wd.Get("http://localhost:3000/redirect")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/redirect: %v\n", err)
 	}
@@ -40,16 +31,8 @@ func TestURLIs(t *testing.T) {
 	}
 }
 func TestURLIsNot(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/redirect")
+	err := wd.Get("http://localhost:3000/redirect")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/redirect: %v\n", err)
 	}
@@ -72,16 +55,8 @@ func TestURLIsNot(t *testing.T) {
 }
 
 func TestURLContains(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/redirect")
+	err := wd.Get("http://localhost:3000/redirect")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/redirect: %v\n", err)
 	}
@@ -104,16 +79,8 @@ func TestURLContains(t *testing.T) {
 }
 
 func TestURLNotContains(t *testing.T) {
-	caps := selenium.Capabilities{"browserName": "firefox"}
-	wd, err := selenium.NewRemote(caps, "")
-	defer wd.Quit()
-
-	if err != nil {
-		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
-	}
-
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/redirect")
+	err := wd.Get("http://localhost:3000/redirect")
 	if err != nil {
 		t.Fatalf("Cannot get http://localhost:3000/redirect: %v\n", err)
 	}
