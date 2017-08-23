@@ -19,3 +19,15 @@ func ElementIsVisible(elt selenium.WebElement) selenium.Condition {
 		return visible, err
 	}
 }
+
+// ElementIsLocatedAndVisible returns a condition that checks if the element is found on page and is visible.
+func ElementIsLocatedAndVisible(by, selector string) selenium.Condition {
+	return func(wd selenium.WebDriver) (bool, error) {
+		element, err := wd.FindElement(by, selector)
+		if err != nil {
+			return false, nil
+		}
+		visible, err := element.IsDisplayed()
+		return visible, err
+	}
+}

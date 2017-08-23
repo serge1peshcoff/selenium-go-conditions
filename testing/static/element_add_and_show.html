@@ -4,16 +4,11 @@
         <title>Selenium Test Page</title>
     </head>
     <body>
-        <script>
-        setTimeout(function() {
+        <h1 id="element">This is the Selenium test web page.</h1>
+        <script>setTimeout(function() {
             var h1 = document.createElement('h1');
             h1.setAttribute("id", "element")
-            h1.style.display = "none"
             document.body.appendChild(h1)
-        }, 500)
-        setTimeout(function() {
-            document.getElementById("element").style.display = "inline"
-        }, 1000)
-        </script>
+        }, 1000)</script>
     </body>
 </html>
