@@ -41,8 +41,28 @@ There is a `type Condition func (selenium.WebDriver) (bool, error)` and `WebDriv
 
 So, what this package does is provides functions that returns `Condition`s, so you would be able to pass it as an argument for `WebDriver.Wait()` function.
 
+
+
 ## Contribution
 
 All issues and PRs are welcomed and appreciated!
 
 If you want to suggest something new, you can make an issue about that, and we'll figure that out!
+
+### Testing
+
+Please make sure that all tests are passing before submitting a PR and that code coverage is good enough.
+
+Before running tests:
+- install `firefox` and `java` (to run `selenium` server)
+- run `testing/setup.sh`, that would download `selenium` webserver and `geckodriver` and copy these files into necesssary folders. If you won't have `testing/selenium-server-standalone-3.5.1.jar` file, it would probably crash.
+
+Then run tests with `go test`.
+You can also get the code coverage with:
+
+```sh
+go test -coverprofile=coverage.out
+go tool cover -func=coverage.out
+```
+
+Also, the Travis CI setup is run at each push to the repository, so please make sure that your build is passing.

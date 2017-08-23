@@ -1,5 +1,3 @@
-// Package conditions is providing some conditions for WebDriver.Wait() function
-// from the "github.com/tebeka/selenium" package.
 package conditions
 
 import (
