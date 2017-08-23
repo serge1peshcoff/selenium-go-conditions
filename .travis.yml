@@ -5,6 +5,13 @@ go:
 
 sudo: required
 
+addons:
+  firefox: latest
+  apt:
+    packages:
+      - oracle-java8-installer
+      - oracle-java8-set-default
+
 install:
   - testing/setup.sh
 
@@ -12,6 +19,7 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
+  - go get ./...
 
 script:
   - go test
