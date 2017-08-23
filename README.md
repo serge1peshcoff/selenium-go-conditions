@@ -1,6 +1,11 @@
 # selenium-until-extra
 
 [![GoDoc](https://godoc.org/github.com/serge1peshcoff/selenium-go-conditions?status.svg)](https://godoc.org/github.com/serge1peshcoff/selenium-go-conditions)
+[![Travis](https://img.shields.io/travis/serge1peshcoff/selenium-go-conditions.svg)](https://travis-ci.org/serge1peshcoff/selenium-go-conditions)
+[![Code Climate](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions/badges/gpa.svg)](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions)
+[![Issue Count](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions/badges/issue_count.svg)](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions)
+[![Test Coverage](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions/badges/coverage.svg)](https://codeclimate.com/github/serge1peshcoff/selenium-go-conditions/coverage)
+
 
 A library that provides conditions for `WebDriver.Wait()` function from `github.com/tebeka/selenium` package.
 
