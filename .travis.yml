@@ -5,6 +5,10 @@ go:
 
 sudo: required
 
+env:
+  global:
+    CC_TEST_REPORTER_ID: 759ed0fd567703c9e92d2a394847bf518a79976d059644350cb53c84423158ab
+
 addons:
   firefox: latest
   apt:
@@ -20,6 +24,11 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
   - go get ./...
+  - go get github.com/axw/gocov
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
-  - go test
+  - go test -coverprofile=c.out
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
