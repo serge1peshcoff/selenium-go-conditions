@@ -18,16 +18,9 @@ func TestTitleIs(t *testing.T) {
 	}
 
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/index")
+	err = wd.Get("http://localhost:3000/title_change")
 	if err != nil {
-		t.Fatalf("Cannot get http://localhost:3000/index: %v\n", err)
-	}
-	element, err := wd.FindElement(selenium.ByID, "changeTitle")
-	if err != nil {
-		t.Fatalf("Cannot find element #changeTitle: %v\n", err)
-	}
-	if err = element.Click(); err != nil {
-		t.Fatalf("Cannot click on  element #changeTitle: %v\n", err)
+		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}
 
 	// This should not raise an error.
@@ -36,9 +29,9 @@ func TestTitleIs(t *testing.T) {
 	}
 
 	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
-	err = wd.Get("http://localhost:3000/index")
+	err = wd.Get("http://localhost:3000/static")
 	if err != nil {
-		t.Fatalf("Cannot get http://localhost:3000/index: %v\n", err)
+		t.Fatalf("Cannot get http://localhost:3000/static: %v\n", err)
 	}
 
 	// This should raise an timeout error.
@@ -57,16 +50,9 @@ func TestTitleIsNot(t *testing.T) {
 	}
 
 	// Testing successful selenium.Wait() call.
-	err = wd.Get("http://localhost:3000/index")
+	err = wd.Get("http://localhost:3000/title_change")
 	if err != nil {
-		t.Fatalf("Cannot get http://localhost:3000/index: %v\n", err)
-	}
-	element, err := wd.FindElement(selenium.ByID, "changeTitle")
-	if err != nil {
-		t.Fatalf("Cannot find element #changeTitle: %v\n", err)
-	}
-	if err = element.Click(); err != nil {
-		t.Fatalf("Cannot click on  element #changeTitle: %v\n", err)
+		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
 	}
 
 	// This should not raise an error.
@@ -75,13 +61,77 @@ func TestTitleIsNot(t *testing.T) {
 	}
 
 	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
-	err = wd.Get("http://localhost:3000/index")
+	err = wd.Get("http://localhost:3000/static")
 	if err != nil {
-		t.Fatalf("Cannot get http://localhost:3000/index: %v\n", err)
+		t.Fatalf("Cannot get http://localhost:3000/static: %v\n", err)
 	}
 
 	// This should raise an timeout error.
 	if err = wd.WaitWithTimeout(conditions.TitleIsNot("Selenium Test Page"), 500*time.Millisecond); err == nil {
+		t.Fatalf("wd.Wait() should raise an error, but it didn't.\n")
+	}
+}
+
+func TestTitleContains(t *testing.T) {
+	caps := selenium.Capabilities{"browserName": "firefox"}
+	wd, err := selenium.NewRemote(caps, "")
+	defer wd.Quit()
+
+	if err != nil {
+		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
+	}
+
+	// Testing successful selenium.Wait() call.
+	err = wd.Get("http://localhost:3000/title_change")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
+	}
+
+	// This should not raise an error.
+	if err = wd.Wait(conditions.TitleContains("changed")); err != nil {
+		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
+	}
+
+	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
+	err = wd.Get("http://localhost:3000/static")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/static: %v\n", err)
+	}
+
+	// This should raise an timeout error.
+	if err = wd.WaitWithTimeout(conditions.TitleContains("changed"), 500*time.Millisecond); err == nil {
+		t.Fatalf("wd.Wait() should raise an error, but it didn't.\n")
+	}
+}
+
+func TestTitleNotContains(t *testing.T) {
+	caps := selenium.Capabilities{"browserName": "firefox"}
+	wd, err := selenium.NewRemote(caps, "")
+	defer wd.Quit()
+
+	if err != nil {
+		t.Fatalf("Cannot start selenium.NewRemote(): %v\n", err)
+	}
+
+	// Testing successful selenium.Wait() call.
+	err = wd.Get("http://localhost:3000/title_change")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/title_change: %v\n", err)
+	}
+
+	// This should not raise an error.
+	if err = wd.Wait(conditions.TitleNotContains("Selenium")); err != nil {
+		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
+	}
+
+	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
+	err = wd.Get("http://localhost:3000/static")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/static: %v\n", err)
+	}
+
+	// This should raise an timeout error.
+	if err = wd.WaitWithTimeout(conditions.TitleNotContains("Selenium"), 500*time.Millisecond); err == nil {
 		t.Fatalf("wd.Wait() should raise an error, but it didn't.\n")
 	}
 }
