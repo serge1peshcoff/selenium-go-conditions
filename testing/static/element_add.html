@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Selenium Test Page</title>
+    </head>
+    <body>
+        <h1 id="element">This is the Selenium test web page.</h1>
+        <script>setTimeout(function() {
+            var h1 = document.createElement('h1');
+            h1.setAttribute("id", "element")
+            document.body.appendChild(h1)
+        }, 1000)</script>
+    </body>
+</html>
