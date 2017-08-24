@@ -2,6 +2,7 @@ package conditions
 
 import (
 	"github.com/tebeka/selenium"
+	"strings"
 )
 
 // ElementIsLocated returns a condition that checks if the element is found on page.
@@ -29,5 +30,29 @@ func ElementIsLocatedAndVisible(by, selector string) selenium.Condition {
 		}
 		visible, err := element.IsDisplayed()
 		return visible, err
+	}
+}
+
+// ElementTextIs returns a condition that checks if element's text equals to string.
+func ElementTextIs(elt selenium.WebElement, text string) selenium.Condition {
+	return func (wd selenium.WebDriver) (bool, error) {
+		eltText, err := elt.Text()
+		if err != nil {
+			return false, err
+		}
+
+		return eltText == text, nil
+	}
+}
+
+// ElementTextContains returns a condition that checks if element's text contains a string.
+func ElementTextContains(elt selenium.WebElement, text string) selenium.Condition {
+	return func (wd selenium.WebDriver) (bool, error) {
+		eltText, err := elt.Text()
+		if err != nil {
+			return false, err
+		}
+
+		return strings.Contains(eltText, text), nil
 	}
 }

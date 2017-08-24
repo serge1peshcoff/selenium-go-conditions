@@ -4,11 +4,17 @@
         <title>Selenium Test Page</title>
     </head>
     <body>
-        <h1 id="element">This is the Selenium test web page.</h1>
-        <script>setTimeout(function() {
+        <script>
+        setTimeout(function() {
             var h1 = document.createElement('h1');
             h1.setAttribute("id", "element")
+            h1.style.display = "none"
+            h1.innerHTML = "This is the Selenium test web page."
             document.body.appendChild(h1)
-        }, 1000)</script>
+        }, 500)
+        setTimeout(function() {
+            document.getElementById("element").style.display = "block"
+        }, 1000)
+        </script>
     </body>
 </html>
