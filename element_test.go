@@ -36,7 +36,7 @@ func TestElementIsVisible(t *testing.T) {
 	// Testing successful selenium.Wait() call.
 	err := wd.Get("http://localhost:3000/element_show")
 	if err != nil {
-		t.Fatalf("Cannot get http://localhost:3000/element_add: %v\n", err)
+		t.Fatalf("Cannot get http://localhost:3000/element_show: %v\n", err)
 	}
 	element, err := wd.FindElement(selenium.ByID, "element")
 	if err != nil {
@@ -83,6 +83,38 @@ func TestElementIsLocatedAndVisible(t *testing.T) {
 
 	// This should raise an timeout error.
 	if err = wd.WaitWithTimeout(conditions.ElementIsLocatedAndVisible(selenium.ByID, "element2"), 500*time.Millisecond); err == nil {
+		t.Fatalf("wd.Wait() should raise an error, but it didn't.\n")
+	}
+}
+
+func TestElementIsEnabled(t *testing.T) {
+	// Testing successful selenium.Wait() call.
+	err := wd.Get("http://localhost:3000/element_enable")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/element_enable: %v\n", err)
+	}
+	element, err := wd.FindElement(selenium.ByID, "element")
+	if err != nil {
+		t.Fatalf("Cannot find #element: %v\n", err)
+	}
+
+	// This should not raise an error.
+	if err = wd.Wait(conditions.ElementIsEnabled(element)); err != nil {
+		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
+	}
+
+	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
+	err = wd.Get("http://localhost:3000/element_enable")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/element_enable: %v\n", err)
+	}
+	element2, err := wd.FindElement(selenium.ByID, "element2")
+	if err != nil {
+		t.Fatalf("Cannot find #element2: %v\n", err)
+	}
+
+	// This should raise an timeout error.
+	if err = wd.WaitWithTimeout(conditions.ElementIsEnabled(element2), 500*time.Millisecond); err == nil {
 		t.Fatalf("wd.Wait() should raise an error, but it didn't.\n")
 	}
 }
@@ -150,3 +182,4 @@ func TestElementTextContains(t *testing.T) {
 		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
 	}
 }
+

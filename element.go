@@ -33,6 +33,14 @@ func ElementIsLocatedAndVisible(by, selector string) selenium.Condition {
 	}
 }
 
+// ElementIsEnabled returns a condition that checks if element's enabled.
+func ElementIsEnabled(elt selenium.WebElement) selenium.Condition {
+	return func (wd selenium.WebDriver) (bool, error) {
+		enabled, err := elt.IsEnabled()
+		return enabled, err
+	}
+}
+
 // ElementTextIs returns a condition that checks if element's text equals to string.
 func ElementTextIs(elt selenium.WebElement, text string) selenium.Condition {
 	return func (wd selenium.WebDriver) (bool, error) {
@@ -54,5 +62,17 @@ func ElementTextContains(elt selenium.WebElement, text string) selenium.Conditio
 		}
 
 		return strings.Contains(eltText, text), nil
+	}
+}
+
+// ElementAttributeIs returns a condition that checks if element's attribute equals to string.
+func ElementAttributeIs(elt selenium.WebElement, attribute, value string) selenium.Condition {
+	return func (wd selenium.WebDriver) (bool, error) {
+		attrValue, err := elt.GetAttribute(attribute)
+		if err != nil {
+			return false, err
+		}
+
+		return attrValue == value, nil
 	}
 }
