@@ -183,3 +183,34 @@ func TestElementTextContains(t *testing.T) {
 	}
 }
 
+func TestElementAttributeIs(t *testing.T) {
+	// Testing successful selenium.Wait() call.
+	err := wd.Get("http://localhost:3000/element_change_attribute")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/element_change_attribute: %v\n", err)
+	}
+	element, err := wd.FindElement(selenium.ByID, "element")
+	if err != nil {
+		t.Fatalf("Cannot find #element: %v\n", err)
+	}
+
+	// This should not raise an error.
+	if err = wd.Wait(conditions.ElementAttributeIs(element, "data", "Some data.")); err != nil {
+		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
+	}
+
+	// Testing unsuccessful selenium.Wait() call (this should raise error cause of timeout).
+	err = wd.Get("http://localhost:3000/static")
+	if err != nil {
+		t.Fatalf("Cannot get http://localhost:3000/static: %v\n", err)
+	}
+	element, err = wd.FindElement(selenium.ByID, "element")
+	if err != nil {
+		t.Fatalf("Cannot find #element: %v\n", err)
+	}
+
+	// This should raise an timeout error.
+	if err = wd.WaitWithTimeout(conditions.ElementAttributeIs(element, "data", "Another data."), 500 * time.Millisecond); err == nil {
+		t.Fatalf("Error while executing wd.Wait(): %v\n", err)
+	}
+}

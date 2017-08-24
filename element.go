@@ -69,7 +69,7 @@ func ElementTextContains(elt selenium.WebElement, text string) selenium.Conditio
 func ElementAttributeIs(elt selenium.WebElement, attribute, value string) selenium.Condition {
 	return func (wd selenium.WebDriver) (bool, error) {
 		attrValue, err := elt.GetAttribute(attribute)
-		if err != nil {
+		if err != nil && err.Error() != "nil return value" {
 			return false, err
 		}
 
